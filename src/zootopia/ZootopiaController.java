@@ -13,14 +13,49 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Paint;
+import java.util.Vector;
+import java.util.HashMap;
+import java.util.Iterator;
 
 /**
  *
  * @author daniel
  */
-public class ZootopiaController implements Initializable {
-   
+
+class item {
     
+    public String imgPath;
+    public String name;
+    public Float value;
+    
+    public item(String i, String n, Float v){
+        imgPath = i;
+        name = n;
+        value = v;
+    }
+}
+
+class inventario{
+    public HashMap<String,Vector<item>> inv = new HashMap<String,Vector<item>>();
+    private Vector<String> labelId = new Vector<String>();
+    
+    public inventario(){
+        labelId.add("caja");
+        labelId.add("paseador");
+        labelId.add("accesorios");
+        labelId.add("alimento");
+        labelId.add("juguetes");
+        labelId.add("premios");
+        labelId.add("camas");
+        Iterator<String> itr = labelId.iterator();
+        while(itr.hasNext()){
+            System.out.println(itr.next());
+        
+        }
+    }
+}
+
+public class ZootopiaController implements Initializable {
     
     @FXML
     private void handleButtonAction(ActionEvent event) {
@@ -29,14 +64,48 @@ public class ZootopiaController implements Initializable {
     
     @FXML
     private void handleLabelBarraMouseDentro(MouseEvent event) {
-        System.out.println("Hola");
-        ((Label)event.getSource()).setTextFill(Paint.valueOf("1711c1"));
+        Label object=(Label)event.getSource();
+        object.setTextFill(Paint.valueOf("1711c1"));
     }
     
     @FXML
     private void handleLabelBarraMouseFuera(MouseEvent event) {
-        System.out.println("Hola");
-        ((Label)event.getSource()).setTextFill(Paint.valueOf("000000"));
+        Label object=(Label)event.getSource();
+        object.setTextFill(Paint.valueOf("000000"));
+    }
+    
+    @FXML
+    private void setImageClickMouse(MouseEvent event) {
+        Label object=(Label)event.getSource();
+        //System.out.println(object.idProperty().get());
+        inventario inv = new inventario();
+        switch(object.idProperty().get()){
+            case "caja":
+                
+                break;
+            case "paseador":
+          
+                break;
+            case "accesorios":
+                
+                break;
+            case "alimento":
+                
+                break;
+            case "juguetes":
+                
+                break;
+            case "premios":
+                
+                break;
+            case "camas":
+                
+                break;
+            default:
+                
+                break;
+                
+        }
     }
     
     @Override
