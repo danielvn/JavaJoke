@@ -30,7 +30,7 @@ public class ZootopiaController implements Initializable {
     @FXML
     private void handleLabelBarraMouseDentro(MouseEvent event) {
         System.out.println("Hola");
-        ((Label)event.getSource()).setTextFill(Paint.valueOf("1711c2"));
+        ((Label)event.getSource()).setTextFill(Paint.valueOf("1711c1"));
     }
     
     @FXML
