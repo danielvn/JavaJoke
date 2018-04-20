@@ -20,6 +20,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 
 /**
@@ -72,7 +73,7 @@ public class ZootopiaController implements Initializable {
         //main_image.setImage(asd);
         //System.out.println(System.getProperty("user.dir"));
         //main_image.toFront();
-        main_image.setImage(new Image("/img/background.jpg"));
+        //main_image.setImage(new Image("/img/background.jpg"));
         
         Label l = new Label("hola");
         ImageView img = new ImageView(new Image("/img/cajas/small.jpg"));
@@ -82,7 +83,7 @@ public class ZootopiaController implements Initializable {
         
         vbox.setPrefWidth(275);
         vbox.setPrefHeight(215);
-        vbox.toFront();
+        //main_image.toFront();
         
         
         flow.getChildren().add(vbox);
@@ -102,12 +103,32 @@ public class ZootopiaController implements Initializable {
     }
     
     @FXML
-    private void setImageClickMouse(MouseEvent event) {
+    private void handleClickLabelInicio(MouseEvent event) {
+        Text object=(Text)event.getSource();
+        
+        flow.getChildren().clear();
+        flow.getChildren().add(new ImageView(new Image("/img/background.jpg")));
+        //flow.getChildren().clear();
+    }
+    
+    @FXML
+    private void showClickMouse(MouseEvent event) {
         Label object=(Label)event.getSource();
         //System.out.println(object.idProperty().get());
         switch(object.idProperty().get()){
             case "caja":
-                
+                flow.getChildren().clear();
+                for(int i = 0; i<4; i++){
+                    Label l = new Label("hola");
+                    ImageView img = new ImageView(new Image("/img/cajas/small.jpg"));
+                    img.setFitWidth(150);
+                    img.setFitHeight(150);
+                    VBox vbox = new VBox(10, l, img);
+        
+                    vbox.setPrefWidth(255);
+                    vbox.setPrefHeight(205);
+                    flow.getChildren().add(vbox);
+                }
                 break;
             case "paseador":
           
