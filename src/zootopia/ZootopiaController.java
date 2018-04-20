@@ -70,12 +70,12 @@ public class ZootopiaController implements Initializable {
     @FXML
     private void handleButtonAction(ActionEvent event) {
         //main_image.setImage(asd);
-        System.out.println("You clicked me!");
+        //System.out.println(System.getProperty("user.dir"));
         //main_image.toFront();
-        main_image.setImage(null);
+        main_image.setImage(new Image("/img/background.jpg"));
         
         Label l = new Label("hola");
-        ImageView img = new ImageView(new Image("file:7197XZH3FPL._SY355_.jpg"));
+        ImageView img = new ImageView(new Image("/img/cajas/small.jpg"));
         img.setFitWidth(200);
         img.setFitHeight(200);
         VBox vbox = new VBox(10, l, img);
@@ -92,6 +92,7 @@ public class ZootopiaController implements Initializable {
     private void handleLabelBarraMouseDentro(MouseEvent event) {
         Label object=(Label)event.getSource();
         object.setTextFill(Paint.valueOf("1711c1"));
+        main_image.setImage(null);
     }
     
     @FXML
