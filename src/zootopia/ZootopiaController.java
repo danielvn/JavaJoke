@@ -13,18 +13,34 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Paint;
+import javafx.scene.Group;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.TextAlignment;
 
 /**
  *
  * @author daniel
  */
 public class ZootopiaController implements Initializable {
-   
     
+    @FXML
+    FlowPane flow = new FlowPane();
     
     @FXML
     private void handleButtonAction(ActionEvent event) {
         System.out.println("You clicked me!");
+        Label l = new Label("hola");
+        l.setTextAlignment(TextAlignment.CENTER);
+        Label w = new Label("hola");
+        ImageView i = new ImageView();
+        VBox vbox = new VBox(10,l,w);
+        
+        vbox.setPrefWidth(265);// prefWidth
+        vbox.setPrefHeight(215);// prefHeight
+        
+        flow.getChildren().add(vbox);
     }
     
     @FXML
