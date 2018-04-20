@@ -22,7 +22,6 @@ public class Zootopia extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("Zootopia.fxml"));
         
         Scene scene = new Scene(root);
-        
         stage.setScene(scene);
         stage.show();
     }
