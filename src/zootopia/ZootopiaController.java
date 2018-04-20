@@ -16,6 +16,11 @@ import javafx.scene.paint.Paint;
 import java.util.Vector;
 import java.util.HashMap;
 import java.util.Iterator;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
+import javafx.scene.layout.VBox;
+
 
 /**
  *
@@ -36,9 +41,8 @@ class item {
 }
 
 class inventario{
-    public HashMap<String,Vector<item>> inv = new HashMap<String,Vector<item>>();
-    private Vector<String> labelId = new Vector<String>();
-    
+    private Vector<String> labelId = new Vector<String>(10);
+    private Vector<Vector<item>> items = new Vector<Vector<item>>(6);
     public inventario(){
         labelId.add("caja");
         labelId.add("paseador");
@@ -50,16 +54,38 @@ class inventario{
         Iterator<String> itr = labelId.iterator();
         while(itr.hasNext()){
             System.out.println(itr.next());
-        
         }
     }
 }
 
 public class ZootopiaController implements Initializable {
+    inventario inv = new inventario();
+    
+    @FXML
+    FlowPane flow = new FlowPane();
+    ImageView main_image = new ImageView();
+    //Image asd = new Image("../../img/7197XZH3FPL._SY355_.jpg");
+    
     
     @FXML
     private void handleButtonAction(ActionEvent event) {
+        //main_image.setImage(asd);
         System.out.println("You clicked me!");
+        //main_image.toFront();
+        main_image.setImage(null);
+        
+        Label l = new Label("hola");
+        ImageView img = new ImageView(new Image("file:7197XZH3FPL._SY355_.jpg"));
+        img.setFitWidth(200);
+        img.setFitHeight(200);
+        VBox vbox = new VBox(10, l, img);
+        
+        vbox.setPrefWidth(275);
+        vbox.setPrefHeight(215);
+        vbox.toFront();
+        
+        
+        flow.getChildren().add(vbox);
     }
     
     @FXML
@@ -78,7 +104,6 @@ public class ZootopiaController implements Initializable {
     private void setImageClickMouse(MouseEvent event) {
         Label object=(Label)event.getSource();
         //System.out.println(object.idProperty().get());
-        inventario inv = new inventario();
         switch(object.idProperty().get()){
             case "caja":
                 
