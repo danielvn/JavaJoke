@@ -28,65 +28,26 @@ import javafx.scene.text.Text;
  * @author daniel
  */
 
-class item {
-    
-    public String imgPath;
-    public String name;
-    public Float value;
-    
-    public item(String i, String n, Float v){
-        imgPath = i;
-        name = n;
-        value = v;
-    }
-}
-
-class inventario{
-    private Vector<String> labelId = new Vector<String>(10);
-    private Vector<Vector<item>> items = new Vector<Vector<item>>(6);
-    public inventario(){
-        labelId.add("caja");
-        labelId.add("paseador");
-        labelId.add("accesorios");
-        labelId.add("alimento");
-        labelId.add("juguetes");
-        labelId.add("premios");
-        labelId.add("camas");
-        Iterator<String> itr = labelId.iterator();
-        while(itr.hasNext()){
-            System.out.println(itr.next());
-        }
-    }
-}
 
 public class ZootopiaController implements Initializable {
-    inventario inv = new inventario();
     
+    String path(String tipo, int i){
+        String str = new String();
+        str = "/img/";
+        str += tipo;
+        str += "/";
+        str += Integer.toString(i+1);
+        str += ".jpg";
+        return str;
+    }
     @FXML
     FlowPane flow = new FlowPane();
     ImageView main_image = new ImageView();
-    //Image asd = new Image("../../img/7197XZH3FPL._SY355_.jpg");
     
     
     @FXML
     private void handleButtonAction(ActionEvent event) {
-        //main_image.setImage(asd);
-        //System.out.println(System.getProperty("user.dir"));
-        //main_image.toFront();
-        //main_image.setImage(new Image("/img/background.jpg"));
         
-        Label l = new Label("hola");
-        ImageView img = new ImageView(new Image("/img/cajas/small.jpg"));
-        img.setFitWidth(200);
-        img.setFitHeight(200);
-        VBox vbox = new VBox(10, l, img);
-        
-        vbox.setPrefWidth(275);
-        vbox.setPrefHeight(215);
-        //main_image.toFront();
-        
-        
-        flow.getChildren().add(vbox);
     }
     
     @FXML
@@ -108,7 +69,6 @@ public class ZootopiaController implements Initializable {
         
         flow.getChildren().clear();
         flow.getChildren().add(new ImageView(new Image("/img/background.jpg")));
-        //flow.getChildren().clear();
     }
     
     @FXML
@@ -117,10 +77,12 @@ public class ZootopiaController implements Initializable {
         //System.out.println(object.idProperty().get());
         switch(object.idProperty().get()){
             case "caja":
+                int cajas = 4;
                 flow.getChildren().clear();
-                for(int i = 0; i<4; i++){
-                    Label l = new Label("hola");
-                    ImageView img = new ImageView(new Image("/img/cajas/small.jpg"));
+                for(int i = 0; i<cajas; i++){
+                    Label l = new Label("Cajas Zootiopia");
+                    //System.out.println(str);
+                    ImageView img = new ImageView(new Image(path("cajas",i)));
                     img.setFitWidth(150);
                     img.setFitHeight(150);
                     VBox vbox = new VBox(10, l, img);
@@ -131,22 +93,101 @@ public class ZootopiaController implements Initializable {
                 }
                 break;
             case "paseador":
-          
+                int paseador = 4;
+                flow.getChildren().clear();
+                for(int i = 0; i<paseador; i++){
+                    Label l = new Label("Paseadores");
+                    //System.out.println(str);
+                    ImageView img = new ImageView(new Image(path("paseadores",i)));
+                    img.setFitWidth(150);
+                    img.setFitHeight(150);
+                    VBox vbox = new VBox(10, l, img);
+        
+                    vbox.setPrefWidth(255);
+                    vbox.setPrefHeight(205);
+                    flow.getChildren().add(vbox);
+                }
                 break;
             case "accesorios":
+                int accesorios = 4;
+                flow.getChildren().clear();
+                for(int i = 0; i<accesorios; i++){
+                    Label l = new Label("Accesorios");
+                    //System.out.println(str);
+                    ImageView img = new ImageView(new Image(path("accesorios",i)));
+                    img.setFitWidth(150);
+                    img.setFitHeight(150);
+                    VBox vbox = new VBox(10, l, img);
+        
+                    vbox.setPrefWidth(255);
+                    vbox.setPrefHeight(205);
+                    flow.getChildren().add(vbox);
+                }
                 
                 break;
             case "alimento":
-                
+                int alimento = 6;
+                flow.getChildren().clear();
+                for(int i = 0; i<alimento; i++){
+                    Label l = new Label("Alimentos");
+                    //System.out.println(str);
+                    ImageView img = new ImageView(new Image(path("alimento",i)));
+                    img.setFitWidth(150);
+                    img.setFitHeight(150);
+                    VBox vbox = new VBox(10, l, img);
+        
+                    vbox.setPrefWidth(255);
+                    vbox.setPrefHeight(205);
+                    flow.getChildren().add(vbox);
+                }
                 break;
             case "juguetes":
-                
+                int juguetes = 5;
+                flow.getChildren().clear();
+                for(int i = 0; i<juguetes; i++){
+                    Label l = new Label("Juguetes");
+                    //System.out.println(str);
+                    ImageView img = new ImageView(new Image(path("juguetes",i)));
+                    img.setFitWidth(150);
+                    img.setFitHeight(150);
+                    VBox vbox = new VBox(10, l, img);
+        
+                    vbox.setPrefWidth(255);
+                    vbox.setPrefHeight(205);
+                    flow.getChildren().add(vbox);
+                }
                 break;
             case "premios":
-                
+                int premios = 6;
+                flow.getChildren().clear();
+                for(int i = 0; i<premios; i++){
+                    Label l = new Label("Premios");
+                    //System.out.println(str);
+                    ImageView img = new ImageView(new Image(path("premios",i)));
+                    img.setFitWidth(150);
+                    img.setFitHeight(150);
+                    VBox vbox = new VBox(10, l, img);
+        
+                    vbox.setPrefWidth(255);
+                    vbox.setPrefHeight(205);
+                    flow.getChildren().add(vbox);
+                }
                 break;
             case "camas":
-                
+                int camas = 6;
+                flow.getChildren().clear();
+                for(int i = 0; i<camas; i++){
+                    Label l = new Label("Camas");
+                    //System.out.println(str);
+                    ImageView img = new ImageView(new Image(path("camas",i)));
+                    img.setFitWidth(150);
+                    img.setFitHeight(150);
+                    VBox vbox = new VBox(10, l, img);
+        
+                    vbox.setPrefWidth(255);
+                    vbox.setPrefHeight(205);
+                    flow.getChildren().add(vbox);
+                }
                 break;
             default:
                 
