@@ -16,10 +16,13 @@ import javafx.scene.paint.Paint;
 import java.util.Vector;
 import java.util.HashMap;
 import java.util.Iterator;
+import javafx.event.EventHandler;
+import javafx.scene.Cursor;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
 
@@ -44,6 +47,8 @@ public class ZootopiaController implements Initializable {
     FlowPane flow = new FlowPane();
     ImageView main_image = new ImageView();
     
+    double orgSceneX, orgSceneY;
+    double orgTranslateX, orgTranslateY;
     
     @FXML
     private void handleButtonAction(ActionEvent event) {
@@ -71,6 +76,33 @@ public class ZootopiaController implements Initializable {
         flow.getChildren().add(new ImageView(new Image("/img/background.jpg")));
     }
     
+    EventHandler<MouseEvent> circleOnMousePressedEventHandler = 
+        new EventHandler<MouseEvent>() {
+ 
+        @Override
+        public void handle(MouseEvent t) {
+            orgSceneX = t.getSceneX();
+            orgSceneY = t.getSceneY();
+            orgTranslateX = ((ImageView)(t.getSource())).getTranslateX();
+            orgTranslateY = ((ImageView)(t.getSource())).getTranslateY();
+        }
+    };
+     
+    EventHandler<MouseEvent> circleOnMouseDraggedEventHandler = 
+        new EventHandler<MouseEvent>() {
+ 
+        @Override
+        public void handle(MouseEvent t) {
+            double offsetX = t.getSceneX() - orgSceneX;
+            double offsetY = t.getSceneY() - orgSceneY;
+            double newTranslateX = orgTranslateX + offsetX;
+            double newTranslateY = orgTranslateY + offsetY;
+             
+            ((ImageView)(t.getSource())).setTranslateX(newTranslateX);
+            ((ImageView)(t.getSource())).setTranslateY(newTranslateY);
+        }
+    };
+    
     @FXML
     private void showClickMouse(MouseEvent event) {
         Label object=(Label)event.getSource();
@@ -90,6 +122,9 @@ public class ZootopiaController implements Initializable {
                     vbox.setPrefWidth(255);
                     vbox.setPrefHeight(205);
                     flow.getChildren().add(vbox);
+                    img.setCursor(Cursor.HAND);
+                    img.setOnMousePressed(circleOnMousePressedEventHandler);
+                    img.setOnMouseDragged(circleOnMouseDraggedEventHandler);
                 }
                 break;
             case "paseador":
