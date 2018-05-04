@@ -11,14 +11,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-/**
- *
- * @author daniel
- */
 public class Zootopia extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
+        
         Parent root = FXMLLoader.load(getClass().getResource("Zootopia.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);

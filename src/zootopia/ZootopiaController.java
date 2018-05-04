@@ -27,14 +27,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.ScrollPane;
-
-
-
-/**
- *
- * @author daniel
- */
-
+import javafx.geometry.Pos;
 
 public class ZootopiaController implements Initializable {
     
@@ -55,12 +48,25 @@ public class ZootopiaController implements Initializable {
     AnchorPane anchorpane = new AnchorPane();
     @FXML
     ScrollPane scroll = new ScrollPane();
+    @FXML
+    ImageView carrito = new ImageView();
     
     
+
     double orgSceneX, orgSceneY;
     double orgTranslateX, orgTranslateY;
     ImageView tempImage;
+    String currentType, id;
+    int dragged = 0;
     
+    String[][] cajasDB = {
+        {"1", "Pequeña", "5000"},
+        {"2", "Mediana", "10000"},
+        {"3", "Grande", "15000"},
+        {"4", "Especial", "20000"}
+    };
+    
+
     @FXML
     private void handleButtonAction(ActionEvent event) {
         
@@ -94,21 +100,16 @@ public class ZootopiaController implements Initializable {
  
         @Override
         public void handle(MouseEvent t) {
-            
+            dragged = 1;
             ImageView obj = ((ImageView)t.getSource());
-                     
+            
             orgSceneX = t.getSceneX();
             orgSceneY = t.getSceneY();
-            //orgTranslateX = ((ImageView)(t.getSource())).getTranslateX();
-            //orgTranslateY = ((ImageView)(t.getSource())).getTranslateY();
-            
-            //orgSceneX = obj.getLayoutX() + obj.getX();
-            //System.out.println(orgSceneX);
-
-            //orgSceneY = obj.getLayoutY() + obj.getY();
-            //System.out.println(orgSceneY);
 
             tempImage = new ImageView(obj.getImage());
+            tempImage.setMouseTransparent(true);
+            id = obj.getId();
+            tempImage.setId(obj.getId());
             
             anchorpane.getChildren().add(tempImage);
             
@@ -116,39 +117,97 @@ public class ZootopiaController implements Initializable {
             tempImage.setFitHeight(150);
             
             tempImage.setX(orgSceneX-t.getX());
-            System.out.println(orgSceneX);
-            tempImage.setTranslateY(orgSceneY-t.getY());
-            System.out.println(orgSceneY);
+            //System.out.println(orgSceneX);
+            tempImage.setY(orgSceneY-t.getY());
+            //System.out.println(orgSceneY);
             
             orgTranslateX = tempImage.getTranslateX();
             orgTranslateY = tempImage.getTranslateY();
-
-            //anchorpane.getChildren().add(img);
-
-            //orgTranslateX = obj.getTranslateX();
-            //System.out.println(orgTranslateX);
-            //orgTranslateY = obj.getTranslateY();
-            //System.out.println(orgTranslateY);
-            //img.setOnMouseDragged(circleOnMouseDraggedEventHandler);
-            //img.setOnMouseReleased(circleOnMouseReleasedEventHandler);
         }
     };
      
+    //@FXML
+    //EventHandler<MouseEvent> carritoOnMouseReleasedEventHandler = 
+    //    new EventHandler<MouseEvent>() {
+ 
+    //    @Override
+        @FXML
+        private void carritoOnMouseReleasedEventHandler(MouseEvent t) {
+            //ImageView obj = ((ImageView)t.getSource());
+            //ImageView img = ((ImageView)(t.getSource()));
+            
+            if(dragged == 1) {
+
+            }
+            
+            System.out.println("mouse released");
+        }
+    //};
+    
+    @FXML
     EventHandler<MouseEvent> circleOnMouseReleasedEventHandler = 
         new EventHandler<MouseEvent>() {
  
         @Override
         public void handle(MouseEvent t) {
+//            dragged = 0;
             //ImageView obj = ((ImageView)t.getSource());
             //ImageView img = ((ImageView)(t.getSource()));
             anchorpane.getChildren().remove(tempImage);
             tempImage = null;
             
+            double carritoX = carrito.getLayoutX();
+            double carritoY = carrito.getLayoutY();
+            double carritoWidth = carrito.getFitWidth();
+            double carritoHeight = carrito.getFitHeight();
+            double mouseX = t.getSceneX();
+            double mouseY = t.getSceneY();
             
-            System.out.println("mouse released");
+            boolean inX = (mouseX >= carritoX) && (mouseX <= (carritoX+carritoWidth));
+            boolean inY = (mouseY >= carritoY) && (mouseY <= (carritoY+carritoHeight));
+            
+            //System.out.println(inX+" "+ inY);
+            
+            if(inX && inY){
+                //System.out.println("hola");
+                switch(currentType){
+                case "caja":
+                    System.out.println(cajasDB[Integer.parseInt(id)-1][2]);
+                    break;
+                case "paseador":
+
+                    break;
+                case "accesorios":
+
+                    break;
+                case "alimento":
+
+                    break;
+                case "juguetes":
+
+                    break;
+                case "premios":
+
+                    break;
+                case "camas":
+
+                    break;
+                default:
+
+                    break;
+
+                }
+            }
+            
+            //System.out.println(t.getSceneX() + " " +t.getSceneY() + "   " + (carritoX) + " " + (carritoY));
+            
+            System.out.println("mouse released1");
+            //dragged = 0;
         }
     };
-    
+        
+        
+    @FXML
     EventHandler<MouseEvent> circleOnMouseDraggedEventHandler = 
         new EventHandler<MouseEvent>() {
  
@@ -163,13 +222,6 @@ public class ZootopiaController implements Initializable {
             tempImage.setTranslateX(newTranslateX);
             tempImage.setTranslateY(newTranslateY);
             
-            //double offsetX = ((ImageView)(t.getSource())).getLayoutX() - orgSceneX;
-            //double offsetY = ((ImageView)(t.getSource())).getLayoutY() - orgSceneY;
-            //double newTranslateX = orgTranslateX + offsetX;
-            //double newTranslateY = orgTranslateY + offsetY;
-             
-            //((ImageView)(t.getSource())).setTranslateX(newTranslateX);
-            //((ImageView)(t.getSource())).setTranslateY(newTranslateY);
         }
     };
     
@@ -184,18 +236,21 @@ public class ZootopiaController implements Initializable {
         flow.setVisible(true);
         scroll.setVisible(true);
         scroll.toFront();
-        //System.out.println(object.idProperty().get());
-        switch(object.idProperty().get()){
+
+        currentType = object.idProperty().get();
+        switch(currentType){
             case "caja":
                 int cajas = 4;
                 flow.getChildren().clear();
                 for(int i = 0; i<cajas; i++){
-                    Label l = new Label("Cajas Zootiopia");
+                    Label l = new Label(cajasDB[i][1]+" - $"+cajasDB[i][2]);
                     //System.out.println(str);
                     ImageView img = new ImageView(new Image(path("cajas",i)));
+                    img.setId(Integer.toString(i+1));
                     img.setFitWidth(150);
                     img.setFitHeight(150);
                     VBox vbox = new VBox(10, l, img);
+                    vbox.setAlignment(Pos.CENTER);
         
                     vbox.setPrefWidth(255);
                     vbox.setPrefHeight(205);
@@ -216,6 +271,7 @@ public class ZootopiaController implements Initializable {
                     img.setFitWidth(150);
                     img.setFitHeight(150);
                     VBox vbox = new VBox(10, l, img);
+                    vbox.setAlignment(Pos.CENTER);
         
                     vbox.setPrefWidth(255);
                     vbox.setPrefHeight(205);
@@ -232,7 +288,9 @@ public class ZootopiaController implements Initializable {
                     img.setFitWidth(150);
                     img.setFitHeight(150);
                     VBox vbox = new VBox(10, l, img);
-        
+                    vbox.setAlignment(Pos.CENTER);
+                    
+                    
                     vbox.setPrefWidth(255);
                     vbox.setPrefHeight(205);
                     flow.getChildren().add(vbox);
@@ -249,7 +307,9 @@ public class ZootopiaController implements Initializable {
                     img.setFitWidth(150);
                     img.setFitHeight(150);
                     VBox vbox = new VBox(10, l, img);
-        
+                    vbox.setAlignment(Pos.CENTER);
+                    
+                    
                     vbox.setPrefWidth(255);
                     vbox.setPrefHeight(205);
                     flow.getChildren().add(vbox);
@@ -265,6 +325,8 @@ public class ZootopiaController implements Initializable {
                     img.setFitWidth(150);
                     img.setFitHeight(150);
                     VBox vbox = new VBox(10, l, img);
+                    vbox.setAlignment(Pos.CENTER);
+                    
         
                     vbox.setPrefWidth(255);
                     vbox.setPrefHeight(205);
@@ -281,7 +343,9 @@ public class ZootopiaController implements Initializable {
                     img.setFitWidth(150);
                     img.setFitHeight(150);
                     VBox vbox = new VBox(10, l, img);
-        
+                    vbox.setAlignment(Pos.CENTER);
+                    
+                    
                     vbox.setPrefWidth(255);
                     vbox.setPrefHeight(205);
                     flow.getChildren().add(vbox);
@@ -297,6 +361,8 @@ public class ZootopiaController implements Initializable {
                     img.setFitWidth(150);
                     img.setFitHeight(150);
                     VBox vbox = new VBox(10, l, img);
+                    vbox.setAlignment(Pos.CENTER);
+                    
         
                     vbox.setPrefWidth(255);
                     vbox.setPrefHeight(205);
