@@ -31,13 +31,13 @@
                </font>
             </Label>
             <Region maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="10.0" prefWidth="200.0" />
-            <Label fx:id="caja" onMouseClicked="#showClickMouse" onMouseEntered="#handleLabelBarraMouseDentro" onMouseExited="#handleLabelBarraMouseFuera" text="Cajas Zootopia">
+            <Label fx:id="cajas" onMouseClicked="#showClickMouse" onMouseEntered="#handleLabelBarraMouseDentro" onMouseExited="#handleLabelBarraMouseFuera" text="Cajas Zootopia">
                <font>
                   <Font size="20.0" />
                </font>
             </Label>
             <Region maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="10.0" prefWidth="200.0" />
-            <Label fx:id="paseador" onMouseClicked="#showClickMouse" onMouseEntered="#handleLabelBarraMouseDentro" onMouseExited="#handleLabelBarraMouseFuera" text="Paseadores">
+            <Label fx:id="paseadores" onMouseClicked="#showClickMouse" onMouseEntered="#handleLabelBarraMouseDentro" onMouseExited="#handleLabelBarraMouseFuera" text="Paseadores">
                <font>
                   <Font size="20.0" />
                </font>
@@ -49,7 +49,7 @@
                </font>
             </Label>
             <Region prefHeight="10.0" prefWidth="200.0" />
-            <Label fx:id="alimento" onMouseClicked="#showClickMouse" onMouseEntered="#handleLabelBarraMouseDentro" onMouseExited="#handleLabelBarraMouseFuera" text="Alimento">
+            <Label fx:id="alimentos" onMouseClicked="#showClickMouse" onMouseEntered="#handleLabelBarraMouseDentro" onMouseExited="#handleLabelBarraMouseFuera" text="Alimento">
                <font>
                   <Font size="20.0" />
                </font>
@@ -84,7 +84,7 @@
             <FlowPane fx:id="flow" maxWidth="550.0" prefHeight="229.0" prefWidth="550.0" />
          </content>
       </ScrollPane>
-      <ImageView fx:id="carrito" fitHeight="140.0" fitWidth="159.0" layoutX="614.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="carrito" fitHeight="77.0" fitWidth="116.0" layoutX="637.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/carrito.png" />
          </image>
@@ -94,5 +94,9 @@
             <Image url="@/img/background.jpg" />
          </image>
       </ImageView>
+      <Label fx:id="carritoTotal" layoutX="655.0" layoutY="102.0" prefHeight="25.0" prefWidth="69.0" text="\$0" textAlignment="CENTER">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
     </children>
 </AnchorPane>
