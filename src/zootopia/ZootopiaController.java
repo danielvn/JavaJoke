@@ -47,6 +47,10 @@ public class ZootopiaController implements Initializable {
     @FXML
     ImageView main_image = new ImageView();
     @FXML
+    Image imag = new Image("img/promociones.jpg");
+    @FXML
+    Image imag2 = new Image("img/background.jpg");
+    @FXML
     AnchorPane anchorpane = new AnchorPane();
     @FXML
     ScrollPane scroll = new ScrollPane();
@@ -198,6 +202,17 @@ public class ZootopiaController implements Initializable {
         //Text object=(Text)event.getSource();
         flow.setVisible(false);
         scroll.setVisible(false);
+        main_image.setImage(imag2);
+        main_image.setVisible(true);
+        main_image.toFront();
+    }
+    
+    @FXML
+    private void handleClickLabelInicio2(MouseEvent event) {
+        //Text object=(Text)event.getSource();
+        flow.setVisible(false);
+        scroll.setVisible(false);
+        main_image.setImage(imag);
         main_image.setVisible(true);
         main_image.toFront();
     }
